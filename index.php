@@ -28,6 +28,11 @@ class wechatCallbackapiTest
         if (!empty($postStr)){  
                   
                 $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);//将postStr变量进行解析并赋予变量postObj。simplexml_load_string（）函数是php中一个解析XML的函数，SimpleXMLElement为新对象的类，LIBXML_NOCDATA表示将CDATA设置为文本节点，CDATA标签中的文本XML不进行解析  
+
+                $file = fopen("in_msg","w");
+                fwrite($file,$postStr);
+                fclose($file);
+                      
                 $fromUsername = $postObj->FromUserName;//将微信用户端的用户名赋予变量FromUserName  
                 $toUsername = $postObj->ToUserName;//将你的微信公众账号ID赋予变量ToUserName  
                 $keyword = trim($postObj->Content);//将用户微信发来的文本内容去掉空格后赋予变量keyword  
