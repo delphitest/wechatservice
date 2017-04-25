@@ -27,6 +27,8 @@ class wechatCallbackapiTest
     {  
         //get post data, May be due to the different environments  
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];//将用户端放松的数据保存到变量postStr中，由于微信端发送的都是xml，使用postStr无法解析，故使用$GLOBALS["HTTP_RAW_POST_DATA"]获取  
+        print("receive message");
+        print($postStr);
   
         //extract post data如果用户端数据不为空，执行30-55否则56-58  
         if (!empty($postStr)){  
