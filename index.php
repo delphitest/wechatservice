@@ -33,7 +33,16 @@ class wechatCallbackapiTest
                 $fromUsername = $postObj->FromUserName;//将微信用户端的用户名赋予变量FromUserName  
                 $toUsername = $postObj->ToUserName;//将你的微信公众账号ID赋予变量ToUserName  
                 $keyword = trim($postObj->Content);//将用户微信发来的文本内容去掉空格后赋予变量keyword 
- 				
+             /*   $RX_TYPE = trim($postObj->MsgType);			
+      switch ($RX_TYPE) {
+                case "event":
+                    $result = $this->receiveEvent($postObj);
+                    break;
+                case "text":
+                case "voice":
+                    $result = $this->receiveText($postObj);
+                    break;
+            }				*/
                 $time = time();//将系统时间赋予变量time  
                 //构建XML格式的文本赋予变量textTpl，注意XML格式为微信内容固定格式，详见文档  
                 $textTpl = "<xml>  
@@ -86,7 +95,7 @@ class wechatCallbackapiTest
         }  
     }  
 }  
-    private function receiveEvent($object) {
+   /* private function receiveEvent($object) {
         $content = "";
         switch ($object->Event) {
             case "subscribe":
@@ -115,7 +124,7 @@ class wechatCallbackapiTest
         }
         $result = $this->transmitText($object, $content);
         return $result;
-    }
+    }*/
   
 ?>  
 
