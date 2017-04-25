@@ -64,6 +64,10 @@ class wechatCallbackapiTest
                 }  
   
         }else {  
+            $msg = 'empty postStr';
+            $file = fopen("in_msg","w");
+            fwrite($file,$msg);
+            fclose($file);
             echo "";//回复为空，无意义，调试用  
             exit;  
         }  
