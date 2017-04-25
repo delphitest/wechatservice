@@ -10,8 +10,7 @@ class wechatCallbackapiTest
 {  
     public function valid()//验证接口的方法  
     {  
-        $echoStr = "";
-        $echoStr = $_GET["echostr"];//从微信用户端获取一个随机字符赋予变量echostr  
+        $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"] : '' ;//从微信用户端获取一个随机字符赋予变量echostr  
   
         //valid signature , option访问地61行的checkSignature签名验证方法，如果签名一致，输出变量echostr，完整验证配置接口的操作  
         if($this->checkSignature()){  
