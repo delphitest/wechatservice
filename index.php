@@ -66,12 +66,9 @@ class wechatCallbackapiTest
     //签名验证程序    ，checkSignature被18行调用。官方加密、校验流程：将token，timestamp，nonce这三个参数进行字典序排序，然后将这三个参数字符串拼接成一个字符串惊喜shal加密，开发者获得加密后的字符串可以与signature对比，表示该请求来源于微信。  
     private function checkSignature()  
     {  
-        $signature = "";  
-        $timestamp = "";  
-        $nonce = ""; 
-        $signature = $_GET["signature"];//从用户端获取签名赋予变量signature  
-        $timestamp = $_GET["timestamp"];//从用户端获取时间戳赋予变量timestamp  
-        $nonce = $_GET["nonce"];    //从用户端获取随机数赋予变量nonce  
+        $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature  
+        $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';//从用户端获取时间戳赋予变量timestamp  
+        $nonce = isset($_GET["nonce"]) ? $_GET["nonce"] : '';    //从用户端获取随机数赋予变量nonce  
                   
         $token = TOKEN;//将常量token赋予变量token  
         $tmpArr = array($token, $timestamp, $nonce);//简历数组变量tmpArr  
