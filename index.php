@@ -39,8 +39,8 @@ class wechatCallbackapiTest
                             <CreateTime>%s</CreateTime>  
                             <MsgType><![CDATA[%s]]></MsgType>  
                             <Content><![CDATA[%s]]></Content>  
-                            <FuncFlag>0</FuncFlag>  
                             </xml>";  
+                           // <FuncFlag>0</FuncFlag>  
                             //39行，%s表示要转换成字符的数据类型，CDATA表示不转义  
                             //40行为微信来源方  
                             //41行为系统时间  
