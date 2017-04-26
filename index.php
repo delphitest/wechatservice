@@ -2,6 +2,7 @@
 /** 
 * wechat php test 
 */  
+<<<<<<< HEAD
 
 require_once("./wx_server/wechatCallbackapiTest.class.php");
 require_once("./wx_server/configure.php");
@@ -11,6 +12,131 @@ $wechatObj = new wechatCallbackapiTest();
 
 //valid() only used for validation when first time connect to wechat server
 //$wechatObj->valid();
+=======
+$log_file = fopen("log","w");
+fwrite($log_file,"p1");
+//define your token  
+define("TOKEN", "weixin");  
+//11--23行代码为签名及接口验证。  
+class wechatCallbackapiTest  
+{ 
+    public function valid()//验证接口的方法  
+    {  
+        $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"] : '' ;//从微信用户端获取一个随机字符赋予变量echostr  
+        //valid signature , option访问地61行的checkSignature签名验证方法，如果签名一致，输出变量echostr，完整验证配置接口的操作  
+        if($this->checkSignature()){  
+            $file_valid_test = fopen("file_valid_test","w");
+            fwrite($file_valid_test,$echoStr );
+            fclose($file_valid_test);
+            echo $echoStr;  
+            exit;  
+        }  
+    }  
+    //公有的responseMsg的方法，是我们回复微信的关键。以后的章节修改代码就是修改这个。  
+    public function responseMsg()  
+    {  
+        //get post data, May be due to the different environments  
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];//将用户端放松的数据保存到变量postStr中，由于微信端发送的都是xml，使用postStr无法解析，故使用$GLOBALS["HTTP_RAW_POST_DATA"]获取  
+       /* $varStr = var_dump($_POST);
+           $file1 = fopen("in_msg2","w");
+                fwrite($file1, $varStr);
+                fclose($file1);*/
+        //extract post data如果用户端数据不为空，执行30-55否则56-58  
+        if (!empty($postStr)){  
+                $file = fopen("in_msg","w");
+                fwrite($file,$postStr);
+                fclose($file);
+                $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);//将postStr变量进行解析并赋予变量postObj。simplexml_load_string（）函数是php中一个解析XML的函数，SimpleXMLElement为新对象的类，LIBXML_NOCDATA表示将CDATA设置为文本节点，CDATA标签中的文本XML不进行解析  
+                $fromUsername = $postObj->FromUserName;//将微信用户端的用户名赋予变量FromUserName  
+                $toUsername = $postObj->ToUserName;//将你的微信公众账号ID赋予变量ToUserName  
+                $keyword = trim($postObj->Content);//将用户微信发来的文本内容去掉空格后赋予变量keyword  
+                $time = time();//将系统时间赋予变量time  
+                //构建XML格式的文本赋予变量textTpl，注意XML格式为微信内容固定格式，详见文档  
+                $textTpl = "<xml>  
+                            <ToUserName><![CDATA[%s]]></ToUserName>  
+                            <FromUserName><![CDATA[%s]]></FromUserName>  
+                            <CreateTime>%s</CreateTime>  
+                            <MsgType><![CDATA[%s]]></MsgType>  
+                            <Content><![CDATA[%s]]></Content>  
+                            </xml>";  
+                           // <FuncFlag>0</FuncFlag>  
+                            //39行，%s表示要转换成字符的数据类型，CDATA表示不转义  
+                            //40行为微信来源方  
+                            //41行为系统时间  
+                            //42行为回复微信的信息类型  
+                            //43行为回复微信的内容  
+                            //44行为是否星标微信  
+                            //XML格式文本结束符号            
+                if(!empty( $keyword ))//如果用户端微信发来的文本内容不为空，执行46--51否则52--53  
+                {  
+                    $msgType = "text";//回复文本信息类型为text型，变量类型为msgType  
+                    $contentStr = "欢迎关注Dragon_Link测试微信号";//我们进行文本输入的内容，变量名为contentStr，如果你要更改回复信息，就在这儿  
+                    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);//将XML格式中的变量分别赋值。注意sprintf函数  
+                    echo $resultStr;//输出回复信息，即发送微信  
+                }else{  
+                    echo "Input something...";//不发送到微信端，只是测试使用  
+                }  
+  
+        }else {  
+            $msg = "empty postStr";
+            $file = fopen("in_msg","w");
+            fwrite($file,$msg);
+            fclose($file);
+            echo "";//回复为空，无意义，调试用  
+            exit;  
+        }  
+    }  
+    //签名验证程序    ，checkSignature被18行调用。官方加密、校验流程：将token，timestamp，nonce这三个参数进行字典序排序，然后将这三个参数字符串拼接成一个字符串惊喜shal加密，开发者获得加密后的字符串可以与signature对比，表示该请求来源于微信。  
+    private function checkSignature()  
+    {  
+      //  fwrite($log_file,"checkSignature the function");
+        if(!defined("TOKEN"))
+        {fwrite($log_file,"\ntoken not find\n");}
+        $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature
+        $file_signature = fopen("file_signature","w");
+        fwrite($file_signature, $signature );
+        fwrite($file_signature,"\n" );
+        $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';//从用户端获取时间戳赋予变量timestamp  
+        fwrite($file_signature, $timestamp );
+        fwrite($file_signature,"\n" );
+        $nonce = isset($_GET["nonce"]) ? $_GET["nonce"] : '';    //从用户端获取随机数赋予变量nonce 
+        fwrite($file_signature, $nonce );
+        fwrite($file_signature,"\n" );
+                  
+        $token = TOKEN;//将常量token赋予变量token  
+        fwrite($file_signature, $token);
+        fwrite($file_signature,"\n" );
+        $tmpArr = array($token, $timestamp, $nonce);//简历数组变量tmpArr 
+        sort($tmpArr, SORT_STRING);//新建排序  
+        $tmpStr = implode( $tmpArr );//字典排序 
+        $tmpStr = sha1( $tmpStr );//shal加密 
+        fwrite($file_signature, $tmpStr );
+        fwrite($file_signature,"\n" );
+        fclose($file_signature);
+        //tmpStr与signature值相同，返回真，否则返回假  
+        if( $tmpStr == $signature ){ 
+            $file_signature_test = fopen("file_signature_test","w");
+            fwrite($file_signature_test,"true" );
+            fclose($file_signature_test);
+            return true;  
+        }else{  
+            return false;  
+        }  
+    }  
+        
+}  
+
+fwrite($log_file,"p5");
+$wechatObj = new wechatCallbackapiTest();//将11行的class类实例化
+fwrite($log_file,"p4");
+//$wechatObj->valid();//使用-》访问类中valid方法，用来验证开发模式  
+fwrite($log_file,"p2");
+$wechatObj->responseMsg();
+fwrite($log_file,"p3");
+fclose($log_file);
+
+?>  
+>>>>>>> c3c554944d970a8ab8c918533ec340d302f1afd5
 
 //create menu on wechat public platform
 //$wechatObj->wxCreateMenu();
