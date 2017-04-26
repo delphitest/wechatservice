@@ -93,7 +93,7 @@ class wechatCallbackapiTest
         fwrite($file_signature, $nonce );
                   
         $token = TOKEN;//将常量token赋予变量token  
-        fwrite($file_signature, $token );
+        fwrite($file_signature, $token+"\n ");
         $tmpArr = array($token, $timestamp, $nonce);//简历数组变量tmpArr 
         sort($tmpArr, SORT_STRING);//新建排序  
         $tmpStr = implode( $tmpArr );//字典排序 
