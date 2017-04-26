@@ -23,11 +23,14 @@ class wechatCallbackapiTest
     {  
         //get post data, May be due to the different environments  
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];//将用户端放松的数据保存到变量postStr中，由于微信端发送的都是xml，使用postStr无法解析，故使用$GLOBALS["HTTP_RAW_POST_DATA"]获取  
-  
+        
+           $file1 = fopen("in_msg2","w");
+                fwrite($file1,$_POST);
+                fclose($file1);
         //extract post data如果用户端数据不为空，执行30-55否则56-58  
         if (!empty($postStr)){  
                 $file = fopen("in_msg","w");
-                fwrite($file,var_dump($postStr));
+                fwrite($file,$postStr);
                 fclose($file);
                 $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);//将postStr变量进行解析并赋予变量postObj。simplexml_load_string（）函数是php中一个解析XML的函数，SimpleXMLElement为新对象的类，LIBXML_NOCDATA表示将CDATA设置为文本节点，CDATA标签中的文本XML不进行解析  
                 $fromUsername = $postObj->FromUserName;//将微信用户端的用户名赋予变量FromUserName  
