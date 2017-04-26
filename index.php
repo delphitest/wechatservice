@@ -86,21 +86,23 @@ class wechatCallbackapiTest
         $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature
         $file_signature = fopen("file_signature","w");
         fwrite($file_signature, $signature );
-
+        fwrite($file_signature,"\n" );
         $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';//从用户端获取时间戳赋予变量timestamp  
         fwrite($file_signature, $timestamp );
+        fwrite($file_signature,"\n" );
         $nonce = isset($_GET["nonce"]) ? $_GET["nonce"] : '';    //从用户端获取随机数赋予变量nonce 
         fwrite($file_signature, $nonce );
+        fwrite($file_signature,"\n" );
                   
         $token = TOKEN;//将常量token赋予变量token  
-        fwrite($file_signature, $token\n);
+        fwrite($file_signature, $token);
+        fwrite($file_signature,"\n" );
         $tmpArr = array($token, $timestamp, $nonce);//简历数组变量tmpArr 
         sort($tmpArr, SORT_STRING);//新建排序  
         $tmpStr = implode( $tmpArr );//字典排序 
-        fwrite($file_signature, $tmpStr );
-     
         $tmpStr = sha1( $tmpStr );//shal加密 
         fwrite($file_signature, $tmpStr );
+        fwrite($file_signature,"\n" );
         fclose($file_signature);
         //tmpStr与signature值相同，返回真，否则返回假  
         if( $tmpStr == $signature ){  
