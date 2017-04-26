@@ -94,8 +94,9 @@ class wechatCallbackapiTest
     }  
 }  
 
-
-$wechatObj = new wechatCallbackapiTest();//将11行的class类实例化  
+fwrite($log_file,"p5");
+$wechatObj = new wechatCallbackapiTest();//将11行的class类实例化
+fwrite($log_file,"p4");
 $wechatObj->valid();//使用-》访问类中valid方法，用来验证开发模式  
 fwrite($log_file,"p2");
 $wechatObj->responseMsg();
