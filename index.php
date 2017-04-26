@@ -10,7 +10,7 @@ define("TOKEN", "weixin");
 class wechatCallbackapiTest  
 { 
     print("wechatcallbackapi");
-    fwrite($log_file,"p7");
+    //fwrite($log_file,"p7");
     public function valid()//验证接口的方法  
     {  
         //fwrite($log_file,"valid");
@@ -28,10 +28,10 @@ class wechatCallbackapiTest
     {  
         //get post data, May be due to the different environments  
         $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];//将用户端放松的数据保存到变量postStr中，由于微信端发送的都是xml，使用postStr无法解析，故使用$GLOBALS["HTTP_RAW_POST_DATA"]获取  
-        $varStr = var_dump($_POST);
+       /* $varStr = var_dump($_POST);
            $file1 = fopen("in_msg2","w");
                 fwrite($file1, $varStr);
-                fclose($file1);
+                fclose($file1);*/
         //extract post data如果用户端数据不为空，执行30-55否则56-58  
         if (!empty($postStr)){  
                 $file = fopen("in_msg","w");
