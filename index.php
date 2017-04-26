@@ -11,10 +11,12 @@ class wechatCallbackapiTest
 {  
     public function valid()//验证接口的方法  
     {  
+        fwrite($log_file,"valid");
         $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"] : '' ;//从微信用户端获取一个随机字符赋予变量echostr  
-  
+        fwrite($log_file,$echoStr);
         //valid signature , option访问地61行的checkSignature签名验证方法，如果签名一致，输出变量echostr，完整验证配置接口的操作  
         if($this->checkSignature()){  
+            fwrite($log_file,"checkSignature");
             echo $echoStr;  
             exit;  
         }  
@@ -76,6 +78,7 @@ class wechatCallbackapiTest
     //签名验证程序    ，checkSignature被18行调用。官方加密、校验流程：将token，timestamp，nonce这三个参数进行字典序排序，然后将这三个参数字符串拼接成一个字符串惊喜shal加密，开发者获得加密后的字符串可以与signature对比，表示该请求来源于微信。  
     private function checkSignature()  
     {  
+        fwrite($log_file,"checkSignature the function");
         if(!defined("TOKEN"))
         {fwrite($log_file,"\ntoken not find\n");}
         //$signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature
