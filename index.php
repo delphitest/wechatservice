@@ -11,14 +11,9 @@ class wechatCallbackapiTest
 { 
     public function valid()//验证接口的方法  
     {  
-       $valid_function = fopen("valid_function","w");
-       fwrite($valid_function,"valid");
-       fclose($valid_function);
         $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"] : '' ;//从微信用户端获取一个随机字符赋予变量echostr  
-       // fwrite($log_file,$echoStr);
         //valid signature , option访问地61行的checkSignature签名验证方法，如果签名一致，输出变量echostr，完整验证配置接口的操作  
         if($this->checkSignature()){  
-           // fwrite($log_file,"checkSignature");
             echo $echoStr;  
             exit;  
         }  
@@ -103,14 +98,16 @@ class wechatCallbackapiTest
         $tmpStr = sha1( $tmpStr );//shal加密 
         fwrite($file_signature, $tmpStr );
         fwrite($file_signature,"\n" );
-        fclose($file_signature);
+    
         //tmpStr与signature值相同，返回真，否则返回假  
         if( $tmpStr == $signature ){  
             return true;  
+            fwrite($file_signature,"true" );
         }else{  
             return false;  
         }  
     }  
+        fclose($file_signature);
 }  
 
 fwrite($log_file,"p5");
