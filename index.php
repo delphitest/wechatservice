@@ -98,16 +98,18 @@ class wechatCallbackapiTest
         $tmpStr = sha1( $tmpStr );//shal加密 
         fwrite($file_signature, $tmpStr );
         fwrite($file_signature,"\n" );
-    
+        fclose($file_signature);
         //tmpStr与signature值相同，返回真，否则返回假  
         if( $tmpStr == $signature ){  
             return true;  
-            fwrite($file_signature,"true" );
+            $file_signature_test = fopen("file_signature_test","w");
+            fwrite($file_signature_test,"true" );
+            fclose($file_signature_test);
         }else{  
             return false;  
         }  
     }  
-        fclose($file_signature);
+        
 }  
 
 fwrite($log_file,"p5");
