@@ -26,7 +26,7 @@ class wechatCallbackapiTest
   
         //extract post data如果用户端数据不为空，执行30-55否则56-58  
         if (!empty($postStr)){  
-            $postStr= var_dump($_POST); 
+            $postStr= var_dump($postStr); 
                 $file = fopen("in_msg","w");
                 fwrite($file,$postStr);
                 fclose($file);
