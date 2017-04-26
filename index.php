@@ -85,7 +85,7 @@ class wechatCallbackapiTest
         {fwrite($log_file,"\ntoken not find\n");}
         $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature
         $checkSignature_function = fopen("checkSignature_function","w");
-        fwrite($checkSignature_function, $signature );
+        fwrite($checkSignature_function, \n$signature );
 
         $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';//从用户端获取时间戳赋予变量timestamp  
         fwrite($checkSignature_function, $timestamp );
@@ -95,9 +95,10 @@ class wechatCallbackapiTest
         $token = TOKEN;//将常量token赋予变量token  
         fwrite($checkSignature_function, $token );
         $tmpArr = array($token, $timestamp, $nonce);//简历数组变量tmpArr 
-        fclose($checkSignature_function);
         sort($tmpArr, SORT_STRING);//新建排序  
-        $tmpStr = implode( $tmpArr );//字典排序  
+        $tmpStr = implode( $tmpArr );//字典排序 
+        fwrite($checkSignature_function, $tmpStr );
+        fclose($checkSignature_function);
         $tmpStr = sha1( $tmpStr );//shal加密  
         //tmpStr与signature值相同，返回真，否则返回假  
         if( $tmpStr == $signature ){  
