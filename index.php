@@ -9,7 +9,8 @@ define("TOKEN", "weixin");
 //11--23行代码为签名及接口验证。  
 class wechatCallbackapiTest  
 { 
-   // fwrite($log_file,"p7");
+    print("wechatcallbackapi");
+    fwrite($log_file,"p7");
     public function valid()//验证接口的方法  
     {  
         //fwrite($log_file,"valid");
