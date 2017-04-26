@@ -84,8 +84,9 @@ class wechatCallbackapiTest
         if(!defined("TOKEN"))
         {fwrite($log_file,"\ntoken not find\n");}
         $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature
-        //$signature = $_GET["signature"];
-        //fwrite($log_file," signature is"+ $signature);
+        $checkSignature_function = fopen("checkSignature_function","w");
+        fwrite($checkSignature_function,$signature);
+        fclose($checkSignature_function);
         $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';//从用户端获取时间戳赋予变量timestamp  
        // fwrite($log_file,"\ntimestamp is"+$timestamp );
         $nonce = isset($_GET["nonce"]) ? $_GET["nonce"] : '';    //从用户端获取随机数赋予变量nonce 
