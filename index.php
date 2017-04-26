@@ -2,7 +2,8 @@
 /** 
 * wechat php test 
 */  
-  
+$log_file = fopen("log","w");
+fwrite($log_file,"p1");
 //define your token  
 define("TOKEN", "weixin");  
 //11--23行代码为签名及接口验证。  
@@ -93,9 +94,13 @@ class wechatCallbackapiTest
     }  
 }  
 
+
 $wechatObj = new wechatCallbackapiTest();//将11行的class类实例化  
 $wechatObj->valid();//使用-》访问类中valid方法，用来验证开发模式  
+fwrite($log_file,"p2");
 $wechatObj->responseMsg();
+fwrite($log_file,"p3");
+fclose($log_file);
 
 ?>  
 
