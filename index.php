@@ -84,22 +84,24 @@ class wechatCallbackapiTest
         if(!defined("TOKEN"))
         {fwrite($log_file,"\ntoken not find\n");}
         $signature = isset($_GET["signature"]) ? $_GET["signature"] : '';//从用户端获取签名赋予变量signature
-        $checkSignature_function = fopen("checkSignature_function","w");
-        fwrite($checkSignature_function, $signature );
+        $file_signature = fopen("file_signature","w");
+        fwrite($file_signature, $signature );
 
         $timestamp = isset($_GET["timestamp"]) ? $_GET["timestamp"] : '';//从用户端获取时间戳赋予变量timestamp  
-        fwrite($checkSignature_function, $timestamp );
+        fwrite($file_signature, $timestamp );
         $nonce = isset($_GET["nonce"]) ? $_GET["nonce"] : '';    //从用户端获取随机数赋予变量nonce 
-        fwrite($checkSignature_function, $nonce );
+        fwrite($file_signature, $nonce );
                   
         $token = TOKEN;//将常量token赋予变量token  
-        fwrite($checkSignature_function, $token );
+        fwrite($file_signature, $token );
         $tmpArr = array($token, $timestamp, $nonce);//简历数组变量tmpArr 
         sort($tmpArr, SORT_STRING);//新建排序  
         $tmpStr = implode( $tmpArr );//字典排序 
-        fwrite($checkSignature_function, $tmpStr );
-        fclose($checkSignature_function);
-        $tmpStr = sha1( $tmpStr );//shal加密  
+        fwrite($file_signature, $tmpStr );
+     
+        $tmpStr = sha1( $tmpStr );//shal加密 
+        fwrite($file_signature, $tmpStr );
+        fclose($file_signature);
         //tmpStr与signature值相同，返回真，否则返回假  
         if( $tmpStr == $signature ){  
             return true;  
