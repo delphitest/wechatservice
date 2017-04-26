@@ -1,12 +1,7 @@
 <?php
 class wechatCallbackapiTest  
 { 
-	private $wx_token;
 	
-	public function_construct(){
-		//$this->wx_token = new wxToken();
-		
-	}
 	
 	   public function valid()//验证接口的方法  
     {  
