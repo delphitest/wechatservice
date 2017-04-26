@@ -9,11 +9,9 @@ define("TOKEN", "weixin");
 //11--23行代码为签名及接口验证。  
 class wechatCallbackapiTest  
 { 
-    print("wechatcallbackapi");
-    //fwrite($log_file,"p7");
     public function valid()//验证接口的方法  
     {  
-        //fwrite($log_file,"valid");
+       fwrite($log_file,"valid");
         $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"] : '' ;//从微信用户端获取一个随机字符赋予变量echostr  
        // fwrite($log_file,$echoStr);
         //valid signature , option访问地61行的checkSignature签名验证方法，如果签名一致，输出变量echostr，完整验证配置接口的操作  
