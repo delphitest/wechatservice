@@ -100,11 +100,11 @@ class wechatCallbackapiTest
         fwrite($file_signature,"\n" );
         fclose($file_signature);
         //tmpStr与signature值相同，返回真，否则返回假  
-        if( $tmpStr == $signature ){  
-            return true;  
+        if( $tmpStr == $signature ){ 
             $file_signature_test = fopen("file_signature_test","w");
             fwrite($file_signature_test,"true" );
             fclose($file_signature_test);
+            return true;  
         }else{  
             return false;  
         }  
