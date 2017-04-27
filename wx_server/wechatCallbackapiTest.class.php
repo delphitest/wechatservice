@@ -2,8 +2,7 @@
 class wechatCallbackapiTest  
 { 
 	
-	
-	   public function valid()//验证接口的方法  
+public function valid()//验证接口的方法  
     {  
         $echoStr = isset($_GET["echostr"]) ? $_GET["echostr"] : '' ;//get a random character from WeChat client and assign to $echostr  
         //valid signature , the signature same will echo the variable value echostr
@@ -13,10 +12,10 @@ class wechatCallbackapiTest
         }  
     } 
 	
-	public function responseMsg()  
-    {  
-        //get post data, May be due to the different environments  
-        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];//将用户端接收的数据保存到变量postStr中，由于微信端发送的都是xml，使用postStr无法解析，故使用$GLOBALS["HTTP_RAW_POST_DATA"]获取  
+public function responseMsg()  
+  {  
+//get post data, May be due to the different environments  
+	$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];//将用户端接收的数据保存到变量postStr中，由于微信端发送的都是xml，使用postStr无法解析，故使用$GLOBALS["HTTP_RAW_POST_DATA"]获取  
         //extract post data 
         if (!empty($postStr)){  
 		//prevent xml external entity injection,the best way is to check the validity of xml by yourself
@@ -29,6 +28,8 @@ class wechatCallbackapiTest
 			$result= $this->receiveEvent($postObj);	
 		        break;
 		    case "text":
+		    case "voice":
+			$result= $this->receiveEvent($postObj);	
 		        break;			
 		}
 		echo $result;
@@ -37,7 +38,7 @@ class wechatCallbackapiTest
             echo "";//回复为空，无意义，调试用  
             exit;  
         }  
-    } 
+  } 
 
 private function transmitText($object,$content)
     {
@@ -61,11 +62,11 @@ private function receiveEvent($object){
 $content = "";
 	switch ($object->Event){
 		case "subscribe":
-			$content = "欢迎关注Dragon_Link测试微信号";
-			break;
-				case "unsubscribe":
-			$content = "";
-			break;
+		  $content = "欢迎关注Dragon_Link测试微信号";
+		  break;
+		case "unsubscribe":
+		  $content = "";
+		  break;
 	
 	}	
 	$result = $this->transmitText($object,$content);
