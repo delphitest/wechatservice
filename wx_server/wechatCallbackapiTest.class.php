@@ -51,8 +51,9 @@ private function transmitText($object,$content)
                             <ToUserName><![CDATA[%s]]></ToUserName>  
                             <FromUserName><![CDATA[%s]]></FromUserName>  
                             <CreateTime>%s</CreateTime>  
-                            <MsgType><![CDATA[%s]]></MsgType>  
-                            <Content><![CDATA[%s]]></Content>  
+                            <MsgType><![CDATA[text]]></MsgType>  
+                            <Content><![CDATA[%s]]></Content> 
+			    <FuncFlag>0<FuncFlag>
                             </xml>";  
 	$result = sprintf($textTpl, $fromUsername, $toUsername, $time, $content);
 	return $result;	
