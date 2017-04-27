@@ -68,13 +68,29 @@ $content = "";
 		case "unsubscribe":
 		  $content = "";
 		  break;
+		case "scancode_push":
+		  $content = "您使用了扫码功能";
+		  break;
+		case "CLICK":{
+		  switch（$object->EventKey）{
+		     /* case "用户名"：$content=$this->wxGetCurrentUserName($object);
+		      break;
+		      case "解绑"：$content=$this->wxUnbind($object);
+		      break;*/
+		  
+		  }
+		}
+		  break;
+			
 	
 	}	
 	$result = $this->transmitText($object,$content);
 	return $result;
 }	
 	
-
+/*public function wxGetUserInfo($object){
+	$openid = $object->FromUserName;
+}*/
 
 private function checkSignature()  
     {  
