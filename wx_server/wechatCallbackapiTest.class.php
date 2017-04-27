@@ -26,7 +26,7 @@ class wechatCallbackapiTest
 		
 		switch ($RX_TYPE){
 		    case "event":
-			$result = $this->receiveEvent($postObj);	
+			$result= $this->receiveEvent($postObj);	
 		        break;
 		    case "text":
 		        break;			
