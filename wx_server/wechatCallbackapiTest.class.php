@@ -69,7 +69,7 @@ $content = "";
 	
 	}	
 	$result = $this->transmitText($object,$content);
-	return $result
+	return $result;
 }	
 	
 
