@@ -42,8 +42,8 @@ public function responseMsg()
 
 private function transmitText($object,$content)
     {
-	 $fromUsername = $postObj->FromUserName;//将微信用户端的用户名赋予变量FromUserName  
-         $toUsername = $postObj->ToUserName;//将你的微信公众账号ID赋予变量ToUserName
+	 $fromUsername = $object->FromUserName;//将微信用户端的用户名赋予变量FromUserName  
+         $toUsername = $object->ToUserName;//将你的微信公众账号ID赋予变量ToUserName
 	 $result = "";
 	 $time = time();//将系统时间赋予变量time 
 	
@@ -54,7 +54,7 @@ private function transmitText($object,$content)
                             <MsgType><![CDATA[%s]]></MsgType>  
                             <Content><![CDATA[%s]]></Content>  
                             </xml>";  
-	$result = sprintf($textTpl, $fromUsername, $toUsername, $time, $contentStr);
+	$result = sprintf($textTpl, $fromUsername, $toUsername, $time, $content);
 	return $result;	
     } 
 	
