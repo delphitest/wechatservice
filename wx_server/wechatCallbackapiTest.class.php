@@ -72,13 +72,13 @@ $content = "";
 		  $content = "您使用了扫码功能";
 		  break;
 		case "CLICK":{
-		  switch（$object->EventKey）{
+		 // switch（$object->EventKey）{
 		     /* case "用户名"：$content=$this->wxGetCurrentUserName($object);
 		      break;
 		      case "解绑"：$content=$this->wxUnbind($object);
 		      break;*/
 		  
-		  }
+		//  }
 		}
 		  break;
 			
